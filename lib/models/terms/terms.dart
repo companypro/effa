@@ -12,12 +12,12 @@ TermsModel TermsModelFromJson(String str) =>
 String TermsModelToJson(TermsModel data) => json.encode(data.toJson());
 
 class TermsModel {
-  String title;
-  String content;
+  String? title;
+  String? content;
 
   TermsModel({
-    required this.title,
-    required this.content,
+     this.title,
+     this.content,
   });
 
   factory TermsModel.fromJson(Map<String, dynamic> json) => TermsModel(
@@ -36,10 +36,10 @@ ShareLinkModel shareLinkModelFromJson(String str) =>
 String shareLinkModelToJson(TermsModel data) => json.encode(data.toJson());
 
 class ShareLinkModel {
-  String title;
+  String? title;
 
   ShareLinkModel({
-    required this.title,
+     this.title,
   });
 
   factory ShareLinkModel.fromJson(Map<String, dynamic> json) => ShareLinkModel(

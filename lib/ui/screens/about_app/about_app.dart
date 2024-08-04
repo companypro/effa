@@ -102,14 +102,14 @@ class AboutApp extends StatelessWidget {
                                           padding: EdgeInsets.only(
                                               top: 10.h, bottom: 30.h),
                                           child: Text(
-                                            controller.aboutModel!.title,
+                                            controller.aboutModel!.title!,
                                             style: GoogleFonts.cairo(
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                         Text(
-                                          controller.aboutModel!.content,
+                                          controller.aboutModel!.content!,
                                           style: GoogleFonts.cairo(
                                             color: lGrey,
                                             // fontWeight: FontWeight.bold,

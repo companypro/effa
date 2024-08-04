@@ -107,14 +107,14 @@ class Terms extends StatelessWidget {
                                             padding: EdgeInsets.only(
                                                 top: 10.h, bottom: 30.h),
                                             child: Text(
-                                              controller.termsModel!.title,
+                                              controller.termsModel!.title!,
                                               style: GoogleFonts.cairo(
                                                   fontSize: 18.sp,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
                                           Text(
-                                            controller.termsModel!.content,
+                                            controller.termsModel!.content!,
                                             style: GoogleFonts.cairo(
                                               color: lGrey,
                                               // fontWeight: FontWeight.bold,
