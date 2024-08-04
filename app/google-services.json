@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1084280375018",
+    "project_id": "effa-f1e7a",
+    "storage_bucket": "effa-f1e7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084280375018:android:dd72d2513cc8a516b33993",
+        "android_client_info": {
+          "package_name": "com.example.effa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx6QHzRdM5eu8POx1hH7q4AJPRw4PeTkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
