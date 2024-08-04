@@ -200,7 +200,7 @@ class LoginController extends GetxController {
     print('ksfjhgjkafhdjg');
     print(controllerr.text);
     if (await CheckInternet.checkInternet()) {
-        loader = false;
+        loader = true;
 
       Dio.Response response = await dio().post('login', queryParameters: {
         'phone': controllerr.text //,
