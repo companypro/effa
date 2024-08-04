@@ -33,8 +33,8 @@ class AuthController extends GetxController {
         data: Dio.FormData.fromMap({
           'phone': phone,
           // 'phone_code':countryCode,
-          'user_code': userCode,
-          "gender": 1,
+         // 'user_code': userCode,
+         // "gender": 1,
         }),
       );
       print("register == ${response.data}");

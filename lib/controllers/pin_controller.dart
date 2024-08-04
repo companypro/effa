@@ -79,8 +79,8 @@ class PinCodeController extends GetxController {
       final Dio.Response response = await dio().post(
         'login',
           queryParameters: {
-          'phone' : myPhone,
-          'user_code' : code
+          'phone' : myPhone//,
+          //'user_code' : code
           }
       );
 
