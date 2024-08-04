@@ -82,7 +82,7 @@ class LoginController extends GetxController {
       ],
       context: ctx,
       showPhoneCode:
-          true, // optional. Shows phone code before the country name.
+      true, // optional. Shows phone code before the country name.
       onSelect: (Country country) {
         countryName = country.nameLocalized!;
         countryCode = "+${country.phoneCode}";
@@ -122,7 +122,7 @@ class LoginController extends GetxController {
     loader = false;
     update();
     Get.to(
-      () => PinPage(code: countryCode, myPhone: controllerr.text),
+          () => PinPage(code: countryCode, myPhone: controllerr.text),
     );
     FirebaseAuth auth = FirebaseAuth.instance;
     // Force reCAPTCHA flo
@@ -201,6 +201,7 @@ class LoginController extends GetxController {
     print(controllerr.text);
     if (await CheckInternet.checkInternet()) {
         loader = true;
+      loader = false;
 
       Dio.Response response = await dio().post('login', queryParameters: {
         'phone': controllerr.text //,
@@ -208,9 +209,9 @@ class LoginController extends GetxController {
       });
 
       if (response.statusCode == 200) {
-        
+
         userAuth = UserAuthFromJson(response.toString());
-         storage.write(
+        storage.write(
           'token',
           userAuth!.accessToken,
         );
@@ -314,7 +315,7 @@ class LoginController extends GetxController {
             loader = false;
             update();
             Get.to(
-              () => PinPage(code: countryCode, myPhone: controllerr.text),
+                  () => PinPage(code: countryCode, myPhone: controllerr.text),
             );
           },
           codeAutoRetrievalTimeout: (String verificationId) {

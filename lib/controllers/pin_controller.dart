@@ -28,11 +28,11 @@ class PinCodeController extends GetxController {
     timerr =
         CountdownTimer(Duration(seconds: seconds), const Duration(seconds: 1))
             .listen((timer) {
-      _remainingTime.value = timer.remaining.inSeconds;
-      if (timer.remaining.inSeconds == 0) {
-        timerr?.cancel();
-      }
-    });
+          _remainingTime.value = timer.remaining.inSeconds;
+          if (timer.remaining.inSeconds == 0) {
+            timerr?.cancel();
+          }
+        });
   }
 
   @override
@@ -77,10 +77,10 @@ class PinCodeController extends GetxController {
     if (res) {
 
       final Dio.Response response = await dio().post(
-        'login',
+          'login',
           queryParameters: {
-          'phone' : myPhone//,
-          //'user_code' : code
+            'phone' : myPhone//,
+            //'user_code' : code
           }
       );
 
