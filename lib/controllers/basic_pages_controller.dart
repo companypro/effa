@@ -101,56 +101,62 @@ class BasicPagesController extends GetxController {
     var res;
     res = await CheckInternet.checkInternet();
     if (res) {
-    try {
-      loader = true;
-      update();
-      Dio.Response response = await dio().post(
-        'general/update_profile',
-        data: Dio.FormData.fromMap({
-          'gender': choosenGender,
-          'frName': firstName.text,
-          'lsName': secondName.text,
-          'birth_date': myDate.toString(),
-          'country_id': 1,
-          'religion_id': religionTapIndex + 1,
-        }),
-      );
-      if (response.statusCode != 200) {
+      try {
+        loader = true;
+        update();
+        Dio.Response response = await dio().post(
+          'general/update_profile',
+          data: Dio.FormData.fromMap({
+            'gender': choosenGender,
+            'frName': firstName.text,
+            'lsName': secondName.text,
+            'birth_date': myDate.toString(),
+            'country_id': 1,
+            'religion_id': religionTapIndex + 1,
+          }),
+        );
+        if (response.statusCode != 200) {
+          loader = false;
+          update();
+          throw HttpExeption(response.data['errors'] == "user code not correct"
+              ? "كود المستخدم غير صحيح"
+              : "");
+        }
+        if (response.statusCode == 200) {
+          storage.write(
+            'gender',
+            choosenGender,
+          );
+          print(
+              "______________________data is registered ---------------------");
+          loader = false;
+          Get.offAll(
+            () => DetailedInfo(
+              showEdit: false,
+            ),
+          );
+          update();
+        }
+      } on HttpExeption catch (e) {
         loader = false;
         update();
-        throw HttpExeption(response.data['errors'] == "user code not correct"
-            ? "كود المستخدم غير صحيح"
-            : "");
-      }
-      if (response.statusCode == 200) {
-        storage.write(
-          'gender',
-          choosenGender,
-        );
-        print("______________________data is registered ---------------------");
-        loader = false;
+        Get.snackbar(e.message, "حاول مره اخري !",
+            borderRadius: 0,
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+      } catch (error) {
         Get.offAll(
           () => DetailedInfo(
             showEdit: false,
           ),
         );
-        update();
+        Get.snackbar(error.toString(), "حاول مره اخري !",
+            borderRadius: 0,
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+        throw (error);
       }
-    } on HttpExeption catch (e) {
-      loader = false;
-      update();
-      Get.snackbar(e.message, "حاول مره اخري !",
-          borderRadius: 0,
-          showProgressIndicator: false,
-          duration: const Duration(seconds: 4));
-    } catch (error) {
-      Get.snackbar(error.toString(), "حاول مره اخري !",
-          borderRadius: 0,
-          showProgressIndicator: false,
-          duration: const Duration(seconds: 4));
-      throw (error);
-    }
-   } else {
+    } else {
       Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
           backgroundColor: Colors.red,
           borderRadius: 0,
@@ -159,31 +165,30 @@ class BasicPagesController extends GetxController {
   }
 
   //fetchNationality
-  Future<List<NationalityModel?>?> fetchNationalityData() async 
-  {
-  var res;
+  Future<List<NationalityModel?>?> fetchNationalityData() async {
+    var res;
     res = await CheckInternet.checkInternet();
     if (res) {
-        try {
-      loaderN = true;
-      final Dio.Response response = await dio().get(
-        'general/nationality',
-      );
+      try {
+        loaderN = true;
+        final Dio.Response response = await dio().get(
+          'general/nationality',
+        );
 
-      final jsonList = response.data as List;
-      nationalityModel =
-          jsonList.map((json) => NationalityModel.fromJson(json)).toList();
-      found.value = nationalityModel!;
-      loaderN = false;
-      update();
-    } catch (err) {
-      loaderN = false;
-      update();
-      print(err);
-      // ignore: unnecessary_brace_in_string_interps
-    }
-    return nationalityModel;
-         } else {
+        final jsonList = response.data as List;
+        nationalityModel =
+            jsonList.map((json) => NationalityModel.fromJson(json)).toList();
+        found.value = nationalityModel!;
+        loaderN = false;
+        update();
+      } catch (err) {
+        loaderN = false;
+        update();
+        print("erro==$err");
+        // ignore: unnecessary_brace_in_string_interps
+      }
+      return nationalityModel;
+    } else {
       Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
           backgroundColor: Colors.red,
           borderRadius: 0,
