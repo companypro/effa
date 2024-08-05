@@ -29,9 +29,14 @@ class AuthController extends GetxController {
     if (res) {
       try {
         Dio.Response response = await dio().post(
-          'login',
+          'register',
           data: Dio.FormData.fromMap({
             'phone': phone,
+            'frName': "م",
+            'lsName': "م",
+            'user_code': userCode,
+         //   '':countryCode,
+            'gender':1
             // 'phone_code':countryCode,
             // 'user_code': userCode,
             // "gender": 1,
@@ -58,21 +63,22 @@ class AuthController extends GetxController {
             'gender',
             userAuth!.user?.gender,
           );
-          if (userAuth!.user?.isComplet == 1) {
-            print("is_complet");
-            Get.offAll(() => DashBoardMale());
-          } else if (userAuth!.user?.isNew == 1) {
-            print("is_complet_true");
-            Get.offAll(() => Terms());
-          } else if (userAuth!.user?.isNew == 0) {
-            print("is_complet_false");
-            if (userAuth!.user?.isAcceptTerms == 1) {
-              Get.offAll(() => MainData());
-            } else if (userAuth!.user?.isAcceptTerms == 0) {
-              print("is_accept_terms_false");
-              Get.offAll(() => Terms());
-            }
-          }
+           Get.offAll(() => Terms());
+          // if (userAuth!.user?.isComplet == 1) {
+          //   print("is_complet");
+          //   Get.offAll(() => DashBoardMale());
+          // } else if (userAuth!.user?.isNew == 1) {
+          //   print("is_complet_true");
+          //   Get.offAll(() => Terms());
+          // } else if (userAuth!.user?.isNew == 0) {
+          //   print("is_complet_false");
+          //   if (userAuth!.user?.isAcceptTerms == 1) {
+          //     Get.offAll(() => MainData());
+          //   } else if (userAuth!.user?.isAcceptTerms == 0) {
+          //     print("is_accept_terms_false");
+          //     Get.offAll(() => Terms());
+          //   }
+          // }
         }
       } on HttpExeption catch (e) {
         Get.snackbar(e.message, "حاول مره اخري !",
