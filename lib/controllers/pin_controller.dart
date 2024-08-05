@@ -74,15 +74,18 @@ class PinCodeController extends GetxController {
     GetStorage storage = GetStorage();
     var res;
     res = await CheckInternet.checkInternet();
+    if ( code == ("+20")) {
+      myPhone = "0$myPhone";
+    }
     if (res) {
 
-      final Dio.Response response = await dio().post(
-          'login',
-          queryParameters: {
-            'phone' : myPhone//,
-            //'user_code' : code
-          }
-      );
+      // final Dio.Response response = await dio().post(
+      //     'login',
+      //     queryParameters: {
+      //       'phone' : myPhone//,
+      //       //'user_code' : code
+      //     }
+      // );
 
       FirebaseAuth auth = FirebaseAuth.instance;
       var codetest = storage.read("verificationId");
