@@ -264,7 +264,7 @@ class Share extends StatelessWidget {
                               ShareResult shareResult;
                               shareResult =
                                   await ShareApp.Share.shareWithResult(
-                                      'controller.shareLinkModel!.title',
+                                      '${controller.shareLinkModel?.title}',
                                       subject: 'Look what I made!');
                               if (shareResult.status ==
                                   ShareResultStatus.success) {
