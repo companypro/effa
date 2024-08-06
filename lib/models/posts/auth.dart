@@ -49,7 +49,7 @@ class AuthController extends GetxController {
               : "");
         }
         if (response.statusCode == 200) {
-          userAuth = UserAuthFromJson(response.toString());
+          userAuth = UserAuth.fromJson(response.data);
           storage.write(
             'token',
             userAuth!.accessToken,
