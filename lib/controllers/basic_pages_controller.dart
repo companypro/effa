@@ -1,4 +1,4 @@
-
+import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/nationality/nationality_model.dart';
@@ -8,15 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as Dio;
 
-
 class BasicPagesController extends GetxController {
   UserAuth? userAuth;
 
   PageController pageController = PageController(initialPage: 0);
 
-  TextEditingController searchController  = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
-  double position = 0.0;
+  double position = 0.20;
 
   bool isFemale = false;
 
@@ -34,7 +33,7 @@ class BasicPagesController extends GetxController {
 
   List<String> demoList = ["كويتي", "يمني", "عراقي", "مصري", "سعودي"];
 
-  List<String> religionList = [ "الاسلام","المسيحيه"];
+  List<String> religionList = ["الاسلام", "المسيحيه"];
 
   DateTime myDate = DateTime(2002);
 
@@ -99,71 +98,102 @@ class BasicPagesController extends GetxController {
 
   //updateUser data
   Future<void> updateUser() async {
-    try {
-      loader = true;
-      update();
-      Dio.Response response = await dio().post(
-        'general/update_profile',
-        data: Dio.FormData.fromMap({
-          'gender': choosenGender,
-          'frName': firstName.text,
-          'lsName': secondName.text,
-          'birth_date': myDate.toString(),
-          'country_id': 1,
-          'religion_id': religionTapIndex + 1,
-        }),
-      );
-      if (response.statusCode != 200) {
-        loader = false;
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      try {
+        loader = true;
         update();
-        throw HttpExeption(response.data['errors'] == "user code not correct" ?
-        "كود المستخدم غير صحيح"
-            : "");
-      }
-      if (response.statusCode == 200) {
-        storage.write(
-          'gender',
-          choosenGender,
+        Dio.Response response = await dio().post(
+          'general/update_profile',
+          data: Dio.FormData.fromMap({
+            'gender': choosenGender,
+            'frName': firstName.text,
+            'lsName': secondName.text,
+            'birth_date': myDate.toString(),
+            'country_id': 1,
+            'religion_id': religionTapIndex + 1,
+          }),
         );
+        if (response.statusCode != 200) {
+          loader = false;
+          update();
+          throw HttpExeption(response.data['errors'] == "user code not correct"
+              ? "كود المستخدم غير صحيح"
+              : "");
+        }
+        if (response.statusCode == 200) {
+          storage.write(
+            'gender',
+            choosenGender,
+          );
+          print(
+              "______________________data is registered ---------------------");
+          loader = false;
+          Get.offAll(
+            () => DetailedInfo(
+              showEdit: false,
+            ),
+          );
+          update();
+        }
+      } on HttpExeption catch (e) {
         loader = false;
-        Get.offAll(() => DetailedInfo(showEdit: false,),);
         update();
+        Get.snackbar(e.message, "حاول مره اخري !",
+            borderRadius: 0,
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+      } catch (error) {
+        Get.offAll(
+          () => DetailedInfo(
+            showEdit: false,
+          ),
+        );
+        Get.snackbar(error.toString(), "حاول مره اخري !",
+            borderRadius: 0,
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+        throw (error);
       }
-    } on HttpExeption catch (e) {
-      loader = false;
-      update();
-      Get.snackbar(e.message, "حاول مره اخري !",
+    } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
           borderRadius: 0,
-          showProgressIndicator: false, duration: const Duration(seconds: 4));
-    }
-    catch (error) {
-      Get.snackbar(error.toString(), "حاول مره اخري !",
-          borderRadius: 0,
-          showProgressIndicator: false, duration: const Duration(seconds: 4));
-      throw (error);
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 
   //fetchNationality
-  Future <List<NationalityModel?>?> fetchNationalityData() async {
-    try {
-      loaderN = true;
-      final Dio.Response response = await dio().get(
-         'general/nationality',
-      );
+  Future<List<NationalityModel?>?> fetchNationalityData() async {
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      try {
+        loaderN = true;
+        final Dio.Response response = await dio().get(
+          'general/nationality',
+        );
 
-      final jsonList = response.data as List;
-      nationalityModel = jsonList.map((json) => NationalityModel.fromJson(json)).toList();
-      found.value = nationalityModel!;
-      loaderN = false;
-      update();
-    } catch (err) {
-      loaderN = false;
-      update();
-      print(err);
-      // ignore: unnecessary_brace_in_string_interps
+        final jsonList = response.data as List;
+        nationalityModel =
+            jsonList.map((json) => NationalityModel.fromJson(json)).toList();
+        found.value = nationalityModel!;
+        loaderN = false;
+        update();
+      } catch (err) {
+        loaderN = false;
+        update();
+        print("erro==$err");
+        // ignore: unnecessary_brace_in_string_interps
+      }
+      return nationalityModel;
+    } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
     }
-    return nationalityModel;
   }
 
   //searchMethod
@@ -172,24 +202,21 @@ class BasicPagesController extends GetxController {
     if (playerName.isEmpty) {
       results = nationalityModel;
     } else {
-      if(choosenGender == 1){
-        results = nationalityModel!
-            .where((element) {
+      if (choosenGender == 1) {
+        results = nationalityModel!.where((element) {
           return element!.name
               .toString()
               .toLowerCase()
-              .contains(playerName.toLowerCase());})
-            .toList();
-      }else{
-        results = nationalityModel!
-            .where((element) {
+              .contains(playerName.toLowerCase());
+        }).toList();
+      } else {
+        results = nationalityModel!.where((element) {
           return element!.fName
               .toString()
               .toLowerCase()
-              .contains(playerName.toLowerCase());})
-            .toList();
+              .contains(playerName.toLowerCase());
+        }).toList();
       }
-
     }
     found.value = results!;
   }
