@@ -118,6 +118,7 @@ class QuestionsController extends GetxController {
       level++;
       // print('categories/get_questions/$categoryId/$level/$lastId');
       print('categories/get_questions?category_id=$categoryId&level=$level&qu=$lastId');
+
       getQuestions();
       resetValues();
     }
@@ -159,6 +160,7 @@ class QuestionsController extends GetxController {
             'qu': lastId,
             },
           // 'categories/get_questions?category_id=2&level=1&qu=1',
+
         );
 
         print(response.data);

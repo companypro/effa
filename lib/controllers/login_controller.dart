@@ -16,29 +16,37 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:dio/dio.dart' as Dio;
 
 class LoginController extends GetxController {
+  UserAuth? userAuth;
 
-  final form = GlobalKey<FormState>();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController controllerr = TextEditingController();
-  bool loader = false;
   String countryName = "";
   String countryCode = "+20";
   bool checkNum = false;
+  bool loader = false;
   String? countrdyCode;
+  TextEditingController phoneController = TextEditingController();
+  final controllerr = TextEditingController();
   final countryPicker = const FlCountryCodePicker(
-    favorites: ['EG', 'JO', 'IQ', 'LY', 'QA', 'SE', 'SY', 'TN', 'PS', 'KW', 'YE', 'AE', 'SA', 'OM'],
+    favorites: [
+      'EG',
+      'JO',
+      'IQ',
+      'LY',
+      'QA',
+      'SE',
+      'SY',
+      'TN',
+      'PS',
+      'KW',
+      'YE',
+      'AE',
+      'SA',
+      'OM'
+    ],
   );
-
-  // @override
-  // void onClose() {
-  //   phoneController.dispose();
-  //   controllerr.dispose();
-  //   super.onClose();
-  // }
-
-  void choseCountry(BuildContext ctx) async {
+  choseCountry(BuildContext ctx) async {
     showCountryPicker(
       useSafeArea: true,
+
       countryListTheme: CountryListThemeData(
         textStyle: GoogleFonts.cairo(),
         searchTextStyle: GoogleFonts.cairo(),
@@ -55,9 +63,26 @@ class LoginController extends GetxController {
           ),
         ),
       ),
-      favorite: ['EG', 'JO', 'IQ', 'LY', 'QA', 'SE', 'SY', 'TN', 'PS', 'KW', 'YE', 'AE', 'SA', 'OM'],
+
+      favorite: [
+        'EG',
+        'JO',
+        'IQ',
+        'LY',
+        'QA',
+        'SE',
+        'SY',
+        'TN',
+        'PS',
+        'KW',
+        'YE',
+        'AE',
+        'SA',
+        'OM'
+      ],
       context: ctx,
-      showPhoneCode: true,
+      showPhoneCode:
+      true, // optional. Shows phone code before the country name.
       onSelect: (Country country) {
         countryName = country.nameLocalized!;
         countryCode = "+${country.phoneCode}";
@@ -67,88 +92,17 @@ class LoginController extends GetxController {
     );
   }
 
-  void setNum() {
+  setNum() {
     checkNum = true;
     update();
   }
 
-
-  UserAuth? userAuth;
-
-  // String countryName = "";
-  // String countryCode = "+20";
-  // bool checkNum = false;
-  // bool loader = false;
-  // String? countrdyCode;
-  // TextEditingController phoneController = TextEditingController();
-  // final controllerr = TextEditingController();
-  // final countryPicker = const FlCountryCodePicker(
-  //   favorites: [
-  //     'EG',
-  //     'JO',
-  //     'IQ',
-  //     'LY',
-  //     'QA',
-  //     'SE',
-  //     'SY',
-  //     'TN',
-  //     'PS',
-  //     'KW',
-  //     'YE',
-  //     'AE',
-  //     'SA',
-  //     'OM'
-  //   ],
-  // );
-  // choseCountry(BuildContext ctx) async {
-  //   showCountryPicker(
-  //     useSafeArea: true,
-  //
-  //     countryListTheme: CountryListThemeData(
-  //       textStyle: GoogleFonts.cairo(),
-  //       searchTextStyle: GoogleFonts.cairo(),
-  //       bottomSheetHeight: 600.h,
-  //       inputDecoration: InputDecoration(
-  //         contentPadding: EdgeInsets.symmetric(vertical: 6.h),
-  //         isDense: true,
-  //         hintText: "بحث",
-  //         prefixIcon: const Icon(Icons.search),
-  //         border: OutlineInputBorder(
-  //           borderSide: BorderSide(
-  //             color: const Color(0xFF8C98A8).withOpacity(0.2),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //
-  //     favorite: [
-  //       'EG',
-  //       'JO',
-  //       'IQ',
-  //       'LY',
-  //       'QA',
-  //       'SE',
-  //       'SY',
-  //       'TN',
-  //       'PS',
-  //       'KW',
-  //       'YE',
-  //       'AE',
-  //       'SA',
-  //       'OM'
-  //     ],
-  //     context: ctx,
-  //     showPhoneCode:
-  //     true, // optional. Shows phone code before the country name.
-  //     onSelect: (Country country) {
-  //       countryName = country.nameLocalized!;
-  //       countryCode = "+${country.phoneCode}";
-  //       countrdyCode = country.flagEmoji;
-  //       update();
-  //     },
-  //   );
-  // }
-
+  @override
+  void onClose() {
+    controllerr.dispose();
+    // TODO: implement onClose
+    super.onClose();
+  }
 
   Future<void> withoutsendOTP() async {
     GetStorage storage = GetStorage();
