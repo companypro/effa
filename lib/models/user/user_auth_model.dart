@@ -41,7 +41,7 @@ class User {
   int? gender;
   int? isBlock;
   int? isWait;
-  dynamic? phoneCode;
+  String? phoneCode;
   String? phone;
   dynamic? countryId;
   String? country;
@@ -58,9 +58,9 @@ class User {
   dynamic? passportImage;
   int? isApproved;
   dynamic? rejectResson;
-  dynamic? aboutYou;
+  String? aboutYou;
   int? isAcceptTerms;
-  dynamic? aboutPartner;
+  String? aboutPartner;
   String? createdAt;
   String? updatedAt;
   int? points;

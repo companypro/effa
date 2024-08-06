@@ -28,7 +28,6 @@ void main() async {
   await GetStorage.init();
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp(
-    name:'effa-f1e7a',
     options: DefaultFirebaseOptions.currentPlatform,
   );
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
