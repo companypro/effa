@@ -212,6 +212,7 @@ class AboutMe extends StatelessWidget {
                                   controller.updateUser(
                                     aboutmeController.text,
                                     partenerController.text,
+                                    interests.selectedOptions,
                                   );
                                   return;
                                 }

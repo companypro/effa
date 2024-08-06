@@ -19,10 +19,10 @@ class AuthController extends GetxController {
   Rx<List<String>> selectedOptionList = Rx<List<String>>([]);
   var selectedOption = ''.obs;
   Future<void> register(
-      String phone,
-      String countryCode,
-      String userCode,
-      ) async {
+    String phone,
+    String countryCode,
+    String userCode,
+  ) async {
     GetStorage storage = GetStorage();
     var res;
     res = await CheckInternet.checkInternet();
@@ -35,8 +35,8 @@ class AuthController extends GetxController {
             'frName': "م",
             'lsName': "م",
             'user_code': userCode,
-         //   '':countryCode,
-            'gender':1
+            //   '':countryCode,
+            'gender': 1
             // 'phone_code':countryCode,
             // 'user_code': userCode,
             // "gender": 1,
@@ -63,7 +63,7 @@ class AuthController extends GetxController {
             'gender',
             userAuth!.user?.gender,
           );
-           Get.offAll(() => Terms());
+          Get.offAll(() => Terms());
           // if (userAuth!.user?.isComplet == 1) {
           //   print("is_complet");
           //   Get.offAll(() => DashBoardMale());
@@ -95,20 +95,20 @@ class AuthController extends GetxController {
           borderRadius: 0,
           snackPosition: SnackPosition.BOTTOM);
       loader = false;
-
     }
-
   }
 
   //updateUser data
   Future<void> updateUser(
-      String? about_you,
-      String? about_partner,
-      ) async {
+    String? about_you,
+    String? about_partner,
+    List? interests,
+  ) async {
     var res;
     res = await CheckInternet.checkInternet();
     if (res) {
       try {
+        print("sssssss-========$interests");
         loader = true;
         update();
         Dio.Response response = await dio().post(
@@ -116,7 +116,7 @@ class AuthController extends GetxController {
           data: Dio.FormData.fromMap({
             'about_partner': about_partner,
             'about_you': about_you,
-            // "interests": interests,
+            'interests': interests,
           }),
         );
         if (response.statusCode != 200) {
@@ -147,17 +147,12 @@ class AuthController extends GetxController {
         print("updateUser == ${error.toString()}");
         throw (error);
       }
-
     } else {
       Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
           backgroundColor: Colors.red,
           borderRadius: 0,
           snackPosition: SnackPosition.BOTTOM);
       loader = false;
-
     }
-
   }
-
-
 }

@@ -115,9 +115,10 @@ class QuestionsController extends GetxController {
           curve: Curves.bounceInOut);
       position += 1 / len;
     } else {
-      level++;
+      // level++;
       // print('categories/get_questions/$categoryId/$level/$lastId');
-      print('categories/get_questions?category_id=$categoryId&level=$level&qu=$lastId');
+      print(
+          'categories/get_questions?category_id=$categoryId&level=$level&qu=$lastId');
 
       getQuestions();
       resetValues();
@@ -154,13 +155,12 @@ class QuestionsController extends GetxController {
         update();
         final Dio.Response response = await dio().get(
           'categories/get_questions',
-            queryParameters: {
+          queryParameters: {
             'category_id': categoryId,
             'level': level,
             'qu': lastId,
-            },
+          },
           // 'categories/get_questions?category_id=2&level=1&qu=1',
-
         );
 
         print(response.data);
@@ -193,6 +193,7 @@ class QuestionsController extends GetxController {
     }
   }
 
+////////////////////////
   //post answers
   Future<void> singleAnswer(
     int qId,

@@ -60,7 +60,7 @@ class ProgressController extends GetxController {
       print('objresponseect ${response.data}');
       user = UserInfooo.fromJson(response.data);
       userImages = user!.images!;
-      personal = user!.categories![0].questions!;
+      personal = user!.categories![1].questions!;
       relegion = user!.categories![1].questions!;
       study = user!.categories![2].questions!;
       family = user!.categories![3].questions!;
@@ -68,12 +68,12 @@ class ProgressController extends GetxController {
       aboutPartner = user!.user!.aboutPartner!;
       aboutYou = user!.user!.aboutYou!;
 
-      if ((user!.user!.aboutPartner == null) && (user!.user!.aboutYou == null)) {
+      if ((user!.user!.aboutPartner == null) &&
+          (user!.user!.aboutYou == null)) {
         interestsDone = false;
       } else {
         interestsDone = true;
       }
-
 
       print('interestsDone ${interestsDone}');
 
@@ -101,7 +101,7 @@ class ProgressController extends GetxController {
         personalnum++;
       }
     }
-    if (personalnum == personal.length ) {
+    if (personalnum == personal.length) {
       personalDone = true;
     }
 
@@ -175,8 +175,6 @@ class ProgressController extends GetxController {
   }
 
   void getProgress() {
-
-
     if (personal.isNotEmpty) {
       progress += 0.1;
     }
@@ -206,5 +204,4 @@ class ProgressController extends GetxController {
 
     update();
   }
-
 }

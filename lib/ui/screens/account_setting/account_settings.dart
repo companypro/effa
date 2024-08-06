@@ -22,6 +22,8 @@ class AccountSettings extends StatelessWidget {
         body: SingleChildScrollView(
           child: GetBuilder<MaleDashboardController>(
             builder: (controller) {
+              print(
+                  "image===${ApiConstants.baseUrl}${controller.user?.images!.first.image.toString()}");
               return Column(children: [
                 Stack(children: [
                   Container(
@@ -37,8 +39,11 @@ class AccountSettings extends StatelessWidget {
                     child: Padding(
                         padding: EdgeInsets.only(top: 60.h),
                         child: CustomImage(
+                          "${ApiConstants.baseUrl}${controller.user?.images?.first.image}",
                           isNetwork: true,
-                            "${controller.user?.images?.isEmpty}" == "true"?"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png":"${ApiConstants.baseUrl}${controller.user?.images?.first}",
+                          // "${controller.user?.images?.isEmpty}" == "true"
+                          //     ? "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+                          //     : "${ApiConstants.baseUrl}${controller.user?.images?.first.image}",
                           // "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
                           height: 96.h,
                           width: 96.w,
