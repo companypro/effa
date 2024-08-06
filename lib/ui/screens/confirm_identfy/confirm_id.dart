@@ -583,15 +583,15 @@ class ConfirmInfo extends StatelessWidget {
                             child: /*Expanded(
                               child:*/ UploadID(
                                 context: context,
-                                myFile: controller.image1,
-                                press: controller.pressed1,
+                                myFile: controller.image2,
+                                press: controller.pressed2,
                                 isImg1: false,
                                 isImg2: true,
                                 isImg3: false,
                                 txt: 'الصورة الأمامية',
                                 isFileChanged: (value) =>
-                                    (controller.updateImage1(value)),
-                                myWidget: controller.image1.uri
+                                    (controller.updateImage2(value)),
+                                myWidget: controller.image2.uri
                                         .toString()
                                         .isEmpty
                                     ? CachedNetworkImage(
@@ -621,7 +621,7 @@ class ConfirmInfo extends StatelessWidget {
                                               "assets/icon/img.svg");
                                         },
                                       )
-                                    : controller.image1.uri
+                                    : controller.image2.uri
                                             .toString()
                                             .isNotEmpty
                                         ? Image.file(

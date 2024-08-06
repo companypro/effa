@@ -170,41 +170,38 @@ class _FamilyState extends State<Family> {
                                                     Radius.circular(10))),
                                           ),
                                           onPressed: () {
-                                            if (controller.pageIndex == controller.questions!.questions.length - 1) {
-                                              // Check if it's the last question
-                                              Get.to(() => DetailedInfo(showEdit: false,)); // Navigate to DetailedInfo page
-                                            } else {
-                                              if (controller.questions?.questions[controller.pageIndex].isSkipable == 1 &&
-                                                  controller.selectedChoice == null) {
-                                                if (kDebugMode) {
-                                                  print("error11111");
-                                                }
-                                                controller.changeIndexnN();
-                                                controller.onTapP();
-                                              } else if (controller.selectedChoice != null) {
-                                                if (controller.questions?.questions[controller.pageIndex].type == 1) {
-                                                  controller.textAnswer(
-                                                      controller.questions!.questions[controller.pageIndex].id);
-                                                } else if (controller.questions?.questions[controller.pageIndex].type == 2 ||
-                                                    controller.questions?.questions[controller.pageIndex].type == 4) {
-                                                  controller.singleAnswer(
-                                                    controller.questions!.questions[controller.pageIndex].id,
-                                                    controller.questions!.questions[controller.pageIndex].answers[
-                                                    controller.selectedChoice!].id,
-                                                  );
-                                                } else {
-                                                  controller.multipleAnswer(
-                                                      controller.questions!.questions[controller.pageIndex].id);
-                                                }
-                                              } else {
-                                                if (kDebugMode) {
-                                                  print("error33333");
-                                                }
-                                                Get.snackbar("", "برجاء اختيار اجراء",
-                                                    borderRadius: 0,
-                                                    showProgressIndicator: false,
-                                                    duration: const Duration(seconds: 2));
+
+
+                                            if (controller.questions?.questions[controller.pageIndex].isSkipable == 1 &&
+                                                controller.selectedChoice == null) {
+                                              if (kDebugMode) {
+                                                print("error11111");
                                               }
+                                              controller.changeIndexnN();
+                                              controller.onTapP();
+                                            } else if (controller.selectedChoice != null) {
+                                              if (controller.questions?.questions[controller.pageIndex].type == 1) {
+                                                controller.textAnswer(
+                                                    controller.questions!.questions[controller.pageIndex].id);
+                                              } else if (controller.questions?.questions[controller.pageIndex].type == 2 ||
+                                                  controller.questions?.questions[controller.pageIndex].type == 4) {
+                                                controller.singleAnswer(
+                                                  controller.questions!.questions[controller.pageIndex].id,
+                                                  controller.questions!.questions[controller.pageIndex].answers[
+                                                  controller.selectedChoice!].id,
+                                                );
+                                              } else {
+                                                controller.multipleAnswer(
+                                                    controller.questions!.questions[controller.pageIndex].id);
+                                              }
+                                            } else {
+                                              if (kDebugMode) {
+                                                print("error33333");
+                                              }
+                                              Get.snackbar("", "برجاء اختيار اجراء",
+                                                  borderRadius: 0,
+                                                  showProgressIndicator: false,
+                                                  duration: const Duration(seconds: 2));
                                             }
                                           },
                                           child: Text(

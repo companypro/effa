@@ -24,5 +24,5 @@ Dio dio() {
 
 class ApiConstants {
   static const baseUrl = 'https://like4like.website/effah/api/';
-  static const imagebaseUrl = 'https://analyzes.online/effah/effah/public/api/';
+  static const imagebaseUrl = 'https://like4like.website/effah/effah/public/api/';
 }

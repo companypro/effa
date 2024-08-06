@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/male_dashboard_controller.dart';
+import '../../../helper/dio_helper.dart';
 import '../detailed _personal_data/detaild_data.dart';
 
 class AccountSettings extends StatelessWidget {
@@ -37,8 +38,8 @@ class AccountSettings extends StatelessWidget {
                         padding: EdgeInsets.only(top: 60.h),
                         child: CustomImage(
                           isNetwork: true,
-                          //   "${controller.user?.images?.isEmpty}" == "true"?"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png":"${ApiConstants.baseUrl}${controller.user?.images?.first}",
-                          "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+                            "${controller.user?.images?.isEmpty}" == "true"?"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png":"${ApiConstants.baseUrl}${controller.user?.images?.first}",
+                          // "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
                           height: 96.h,
                           width: 96.w,
                           shape: true,

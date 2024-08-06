@@ -34,6 +34,8 @@ class ProgressController extends GetxController {
   List<Question> personal = [];
 
   int? totalDots;
+  String? aboutYou;
+  String? aboutPartner;
 
   @override
   void onInit() async {
@@ -54,6 +56,8 @@ class ProgressController extends GetxController {
       final Dio.Response response = await dio().get(
         'myData',
       );
+
+      print('objresponseect ${response.data}');
       user = UserInfooo.fromJson(response.data);
       userImages = user!.images!;
       personal = user!.categories![0].questions!;
@@ -61,6 +65,17 @@ class ProgressController extends GetxController {
       study = user!.categories![2].questions!;
       family = user!.categories![3].questions!;
       interests = user!.interests!;
+      aboutPartner = user!.user!.aboutPartner!;
+      aboutYou = user!.user!.aboutYou!;
+
+      if ((user!.user!.aboutPartner == null) && (user!.user!.aboutYou == null)) {
+        interestsDone = false;
+      } else {
+        interestsDone = true;
+      }
+
+
+      print('interestsDone ${interestsDone}');
 
       if (user!.images!.isEmpty) {
         totalDots = 1;
@@ -160,6 +175,8 @@ class ProgressController extends GetxController {
   }
 
   void getProgress() {
+
+
     if (personal.isNotEmpty) {
       progress += 0.1;
     }
@@ -189,4 +206,5 @@ class ProgressController extends GetxController {
 
     update();
   }
+
 }

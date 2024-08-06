@@ -71,6 +71,7 @@ class UploadPicRigister extends StatelessWidget {
                 );
               });
         },
+        borderRadius: BorderRadius.circular(80),
         child: uploadProfile());
   }
 

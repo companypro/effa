@@ -88,6 +88,7 @@ class PersonalPic extends StatelessWidget {
                                                 onTap: () {
                                                   controller.selectImages();
                                                 },
+                                        borderRadius: BorderRadius.circular(25),
                                                 child: Container(
                                                     margin: EdgeInsets.symmetric(
                                                         horizontal: MediaQuery.of(context).size.width*0.02, vertical: 10),
@@ -142,6 +143,8 @@ class PersonalPic extends StatelessWidget {
                                 onTap: () {
                                   controller.selectImages();
                                 },
+                                borderRadius: BorderRadius.circular(25),
+
                                 child: Container(
                                     height: 100,
                                     width: 100,

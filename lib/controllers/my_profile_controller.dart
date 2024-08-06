@@ -24,6 +24,7 @@ class MyProfileController extends GetxController {
   }
 
   showParent() {
+
     parentDataShow = true;
     update();
   }
@@ -41,6 +42,8 @@ class MyProfileController extends GetxController {
   List<Question> personal = [];
 
   int? totalDots;
+  String? aboutYou;
+  String? aboutPartner;
 
   double currentIndex = 0.0;
 
@@ -69,6 +72,9 @@ class MyProfileController extends GetxController {
       study = user!.categories![2].questions!;
       family = user!.categories![3].questions!;
       interests = user!.interests!;
+      aboutYou = user!.user!.aboutYou ?? '';
+      aboutPartner = user!.user!.aboutPartner ?? '';
+
 
       if (user!.images!.isEmpty) {
         totalDots = 1;

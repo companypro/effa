@@ -239,31 +239,37 @@ class DetailedInfo extends StatelessWidget {
                           ? InkWell(
                               onTap: () => Navigator.pop(context),
                               child: EditButton(title: "رجوع"))
-                          : RegisterButton(
-                            progressVal:controller.progress,
-                              gradient: true,
-                              title: Text('تسجيل الحساب',
-                                  style: GoogleFonts.cairo(
-                                    color: white,
-                                    fontSize: 16.sp,
-                                  )),
-                              function: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    backgroundColor: transparnt,
-                                    builder: (context) {
-                                      return WaitBottomSheet(
-                                        id: 1,
-                                      );
-                                    });
-                              },
-                              nav: () {
-                                Get.to(() => 
-                                  DashBoardMale(),
-                                );
-                              },
-                              color: basicPink,
-                            ),
+                          : RegisterButton1(
+                        progressVal: controller.progress,
+                        gradient: true,
+                        title: Text('تسجيل الحساب',
+                            style: GoogleFonts.cairo(
+                              color: Colors.white,
+                              fontSize: 16.sp,
+                            )),
+                        function: () {
+                          showModalBottomSheet(
+                            context: context,
+                            backgroundColor: transparnt,
+                            builder: (context) {
+                              return WaitBottomSheet(
+                                id: 1,
+                              );
+                            },
+                          );
+                        },
+                        nav: () {
+                          Get.to(() => DashBoardMale());
+                        },
+                        color: basicPink,
+                        personalDone: controller.personalDone,
+                        relegionDone: controller.relegionDone,
+                        studyDone: controller.studyDone,
+                        familyDone: controller.familyDone,
+                        interestsDone: controller.interestsDone,
+                        imageDone: controller.imageDone,
+                      )
+                      ,
                     ),
                     SizedBox(
                       height: 20.h,
