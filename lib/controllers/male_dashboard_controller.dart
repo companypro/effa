@@ -10,6 +10,7 @@ import 'package:effa/helper/dio_helper.dart';
 import 'package:dio/dio.dart' as Dio;
 
 import '../models/user/user_data.dart';
+import '../ui/screens/auth/login.dart';
 
 class MaleDashboardController extends GetxController {
   @override
@@ -27,6 +28,32 @@ class MaleDashboardController extends GetxController {
       print("MaleDashboardController response == ${response.data}");
       if (response.statusCode == 200) {
         user = UserInfooo.fromJson(response.data);
+      }
+    } catch (err) {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
+      // ignore: unnecessary_brace_in_string_interps
+    }
+  }
+  Future<void> logout() async {
+    try {
+      final Dio.Response response = await dio().post(
+        'general/logout',
+        queryParameters: {
+          'user_id': user!.user!.id!
+        }
+      );
+      print("user_id ${response.data}");
+      if (response.statusCode == 200) {
+        Get.offAll(LoginPage(), //next page class
+            duration: const Duration(
+                milliseconds:
+                400), //duration of transitions, default 1 sec
+            transition: Transition
+                .leftToRight //transition effect
+        );
       }
     } catch (err) {
       Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",

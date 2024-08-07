@@ -82,16 +82,16 @@ class MyProfile extends StatelessWidget {
                         controller.gender
                             ? ProfileCard()
                             : GirlWidget(
-                                name: controller.user!.user!.fullName!,
-                                age: controller.user!.user!.age.toString(),
-                                job: controller.user!.job.toString(),
+                                name: controller.user?.user!.fullName ?? '',
+                                age: controller.user?.user?.age.toString() ?? '',
+                                job: controller.user?.job.toString() ?? '',
                                 education:
-                                    controller.user!.education.toString(),
+                                    controller.user?.education.toString() ?? '',
                                 socialSituation:
-                                    controller.user!.socialSituation.toString(),
+                                    controller.user?.socialSituation.toString() ?? '',
                                 nationality:
-                                    controller.user!.nationality.toString(),
-                                address: controller.user!.address.toString()),
+                                    controller.user?.nationality.toString() ?? '',
+                                address: controller.user?.address.toString() ?? ''),
                         MyInfoCard(),
                         showEdit
                             ? InkWell(

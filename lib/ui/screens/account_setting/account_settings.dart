@@ -39,11 +39,11 @@ class AccountSettings extends StatelessWidget {
                     child: Padding(
                         padding: EdgeInsets.only(top: 60.h),
                         child: CustomImage(
-                          "${ApiConstants.baseUrl}${controller.user?.images?.first.image}",
+                          // "${ApiConstants.baseUrl}${controller.user?.images?.first.image}",
                           isNetwork: true,
-                          // "${controller.user?.images?.isEmpty}" == "true"
-                          //     ? "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-                          //     : "${ApiConstants.baseUrl}${controller.user?.images?.first.image}",
+                          "${controller.user?.images?.isEmpty}" == "true"
+                              ? "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+                              : "${ApiConstants.baseUrl}${controller.user!.user!.image}",
                           // "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
                           height: 96.h,
                           width: 96.w,
@@ -261,13 +261,8 @@ class AccountSettings extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Get.offAll(LoginPage(), //next page class
-                                      duration: const Duration(
-                                          milliseconds:
-                                              400), //duration of transitions, default 1 sec
-                                      transition: Transition
-                                          .leftToRight //transition effect
-                                      );
+                                  controller.logout();
+
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(top: 3.0.h),
