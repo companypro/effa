@@ -9,13 +9,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
+import 'package:carousel_slider/carousel_controller.dart' as carousel_slider_controller;
 
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileCard extends StatelessWidget {
   ProfileCard({Key? key}) : super(key: key);
   MyProfileController controller = Get.find();
-  final CarouselController controllerImages = CarouselController();
+  final carousel_slider_controller.CarouselController controllerImages = carousel_slider_controller.CarouselController();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
