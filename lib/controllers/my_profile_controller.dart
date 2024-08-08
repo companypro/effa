@@ -1,12 +1,13 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:effa/helper/dio_helper.dart';
+import 'package:effa/models/nationality/nationality_model.dart';
 import 'package:effa/models/user/user_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as Dio;
 
 class MyProfileController extends GetxController {
-  bool gender = false;
+  int gender = 1;
   bool parentDataShow = false;
   bool isRequest = false;
   UserInfooo? user;
@@ -24,10 +25,10 @@ class MyProfileController extends GetxController {
   }
 
   showParent() {
-
     parentDataShow = true;
     update();
   }
+  List<NationalityModel?>? nationalityModel;
 
   List<ImagesUser> userImages = [];
 
@@ -41,7 +42,7 @@ class MyProfileController extends GetxController {
 
   List<Question> personal = [];
 
-  int? totalDots;
+  int? totalDots = 1;
   String? aboutYou;
   String? aboutPartner;
 
@@ -75,7 +76,10 @@ class MyProfileController extends GetxController {
       aboutYou = user!.user!.aboutYou ?? '';
       aboutPartner = user!.user!.aboutPartner ?? '';
 
+      if (user?.user!.gender == 2) {
 
+
+      }
       if (user!.images!.isEmpty) {
         totalDots = 1;
       } else {
@@ -92,5 +96,4 @@ class MyProfileController extends GetxController {
       // ignore: unnecessary_brace_in_string_interps
     }
   }
-
 }

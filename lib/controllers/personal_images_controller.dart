@@ -104,7 +104,7 @@ class PersonalImagesController extends GetxController {
           showProgressIndicator: true,
           duration: const Duration(seconds: 10));
       Dio.Response response = await dio().post(
-        'update_profile_image',
+        '+',
         options: Options(contentType: 'multipart/form-data'),
         data: Dio.FormData.fromMap({"image": imageServer}),
       );

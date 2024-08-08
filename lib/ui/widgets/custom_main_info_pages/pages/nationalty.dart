@@ -5,11 +5,13 @@ import 'package:effa/helper/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NationalityInfo extends GetView<BasicPagesController> {
   NationalityInfo({Key? key}) : super(key: key);
   BasicPagesController controller = Get.find();
+  GetStorage storage = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,14 @@ class NationalityInfo extends GetView<BasicPagesController> {
                             print(
                                 "controller.found.length== ${controller.nationalityModel![4]!.fName}");
                             return InkWell(
-                              onTap: () {
+                              onTap: () async {
+                                String nationalityVal = '';
+                                if (controller.choosenGender != 1) {
+                                  nationalityVal =
+                                      controller.found[index]!.fName;
+                                }
+                                await storage.write("nationality", nationalityVal);
+
                                 controller.choseNational(index, true);
                                 controller.choseNational(
                                     controller.found[index]!.id, true);

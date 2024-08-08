@@ -20,6 +20,22 @@ class MaleDashboardController extends GetxController {
   }
 
   UserInfooo? user;
+  
+  List<ImagesUser> userImages = [];
+
+  List<String> interests = [];
+
+  List<Question> family = [];
+
+  List<Question> study = [];
+
+  List<Question> relegion = [];
+
+  List<Question> personal = [];
+
+  int? totalDots =1;
+  String? aboutYou;
+  String? aboutPartner;
   Future<void> fetchUserData() async {
     try {
       final Dio.Response response = await dio().get(
@@ -27,7 +43,16 @@ class MaleDashboardController extends GetxController {
       );
       print("MaleDashboardController response == ${response.data}");
       if (response.statusCode == 200) {
-        user = UserInfooo.fromJson(response.data);
+      //  user = UserInfooo.fromJson(response.data);
+           user = UserInfooo.fromJson(response.data);
+      userImages = user!.images!;
+      personal = user!.categories![0].questions!;
+      relegion = user!.categories![1].questions!;
+      study = user!.categories![2].questions!;
+      family = user!.categories![3].questions!;
+      interests = user!.interests!;
+      aboutYou = user!.user!.aboutYou ?? '';
+      aboutPartner = user!.user!.aboutPartner ?? '';
       }
     } catch (err) {
       Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",

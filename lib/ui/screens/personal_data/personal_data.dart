@@ -28,9 +28,10 @@ class _PersonalDataState extends State<PersonalData> {
   void initState() {
     controller.categoryId = 1;
     controller.getQuestions();
+    
     // TODO: implement initState
     super.initState();
-  }
+  }                 
 
   @override
   Widget build(BuildContext context) {

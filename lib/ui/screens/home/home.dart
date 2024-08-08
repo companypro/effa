@@ -7,9 +7,11 @@ import 'package:effa/ui/widgets/custom_steps.dart';
 import 'package:effa/ui/widgets/custom_user_images.dart';
 import 'package:effa/ui/widgets/custom_user_info.dart';
 import 'package:effa/ui/widgets/girl_widget.dart';
+import 'package:effa/ui/widgets/profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 bool show = false;
@@ -46,35 +48,51 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         ),
         child: GetBuilder<MyProfileController>(
           builder: (controller) {
-            return NestedScrollView(
+                GetStorage storage = GetStorage();
+
+           String nationalityVal =  storage.read("nationality");
+            return controller.loader
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: basicPink,
+                    ),
+                  )
+                : NestedScrollView(
               headerSliverBuilder: (context, value) {
                 return [
                   SliverToBoxAdapter(
                       child: Column(children: [
-                    controller.gender
-                        ? ImageUserCard(
-                            name: "احمد",
-                            age: "22",
-                            socialStatus: "اعزب",
-                            nationality: "مصري",
-                            job: "مهندي",
-                            dotsCount: controller.totalDots!,
-                            position: controller.currentIndex,
-                            study: "جامعي",
-                            city: "الغربيه",
-                            images: controller.userImages,
-                            onPageChanged: (index, reason) {
-                              controller.updateIndex(index.toDouble());
-                            },
-                          )
+                    controller.user?.user!.gender == 1
+                    ? ProfileCard()
+                        // ? ImageUserCard(
+                        //         name: controller.user?.user!.fullName ?? '',
+                        //     age: controller.user?.user!.age!.toString() ?? '',
+                            
+                        //     socialStatus:controller.relegion[0].answerContent.toString() ??
+                        //             '',
+                        //     nationality:
+                        //         controller.user?.nationality.toString() ?? '',
+                        //     job:  controller.user?.job.toString() ?? '',
+                        //     dotsCount: controller.totalDots!,
+                        //     position: controller.currentIndex,
+                        //     study:controller.study[0].answerContent ?? '',
+                        //     city:  controller.user?.address.toString() ?? '',
+                        //     images: controller.userImages,
+                        //     onPageChanged: (index, reason) {
+                        //       controller.updateIndex(index.toDouble());
+                        //     },
+                        //   )
                         : GirlWidget(
-                            name: "نورهان",
-                            age: "22",
-                            job: "لاتوجد وظيفه",
-                            education: "عالي",
-                            socialSituation: "عزباء",
-                            nationality: "مصريه",
-                            address: "القاهره"),
+                                name: controller.user?.user!.fullName ?? '',
+                            age: controller.user?.user!.age!.toString() ?? '',
+                            job: controller.user?.job.toString() ?? '',
+                            education:
+                                controller.study[0].answerContent ?? '',
+                            socialSituation:
+                                controller.relegion[0].answerContent.toString(),
+                            nationality:nationalityVal,
+                              //  controller.user?.nationality.toString() ?? '',
+                            address: controller.user?.address.toString() ?? ''),
                     SizedBox(
                       height: 20.h,
                     ),
@@ -83,7 +101,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(15),
                           color: whiteRaduis),
                       child: Padding(
-                        padding: const EdgeInsets.only(top:  15),
+                        padding: const EdgeInsets.only(top: 15),
                         child: TabBar(
                           labelColor: red,
                           unselectedLabelColor: black,
@@ -126,14 +144,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         interests: controller.interests,
                         userImages: controller.userImages,
                         aboutMe: controller.aboutYou ?? "",
-                        aboutPartner:controller.aboutPartner ?? "",
+                        aboutPartner: controller.aboutPartner ?? "",
                         cost: "150",
                         isRequest: controller.isRequest,
                         onSendRequest: () {
                           controller.requestFatherData();
                           Get.back();
                         },
-                        isGirl: false,
+                        isGirl:controller.user?.user!.gender == 1?false: true,
                         cancelFather: () {
                           controller.cancelFather();
                         },
@@ -153,7 +171,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         guardianName: "احمد احمد",
                         guardianRelate: "الاب",
                         phone: "0151581424",
-                        mainBalance: controller.user?.user?.points.toString() ?? '',
+                        mainBalance:
+                            controller.user?.user?.points.toString() ?? '',
                         showCost: "150",
                         isGirl: false,
                       ),

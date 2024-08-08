@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyProfile extends StatelessWidget {
@@ -68,6 +69,9 @@ class MyProfile extends StatelessWidget {
         ),
         body: GetBuilder<MyProfileController>(
           builder: (controller) {
+                     GetStorage storage = GetStorage();
+
+           String nationalityVal =  storage.read("nationality");
             return controller.loader
                 ? const Center(
                     child: CircularProgressIndicator(
@@ -79,18 +83,16 @@ class MyProfile extends StatelessWidget {
                       padding: EdgeInsets.only(
                           right: 10.w, left: 10.w, top: 9.h, bottom: 30.h),
                       child: Column(children: [
-                        controller.gender
+                       controller.user?.user!.gender == 1
                             ? ProfileCard()
                             : GirlWidget(
                                 name: controller.user?.user!.fullName ?? '',
                                 age: controller.user?.user?.age.toString() ?? '',
                                 job: controller.user?.job.toString() ?? '',
-                                education:
-                                    controller.user?.education.toString() ?? '',
-                                socialSituation:
-                                    controller.user?.socialSituation.toString() ?? '',
-                                nationality:
-                                    controller.user?.nationality.toString() ?? '',
+                                education:controller.study[0].answerContent ?? '',
+                                socialSituation:controller.relegion[0].answerContent ?? '',
+                                nationality:nationalityVal,
+                                  //  controller.user?.nationality.toString() ?? '',
                                 address: controller.user?.address.toString() ?? ''),
                         MyInfoCard(),
                         showEdit

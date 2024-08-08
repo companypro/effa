@@ -107,7 +107,7 @@ class BasicPagesController extends GetxController {
         Dio.Response response = await dio().post(
           'general/update_profile',
           data: Dio.FormData.fromMap({
-            'gender': choosenGender,
+            'gender': choosenGender.toString(),
             'frName': firstName.text,
             'lsName': secondName.text,
             'birth_date': myDate.toString(),
@@ -137,7 +137,7 @@ class BasicPagesController extends GetxController {
           );
           update();
         }
-      } on HttpExeption catch (e) {
+      } on HttpExeption catch (e) { 
         loader = false;
         update();
         Get.snackbar(e.message, "حاول مره اخري !",

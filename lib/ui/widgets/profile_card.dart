@@ -103,7 +103,7 @@ class ProfileCard extends StatelessWidget {
                                 width: 5.w,
                               ),
                               Text(
-                                "${controller.user?.socialSituation}",
+                                "${controller.relegion[0]?.answerContent.toString() ??''}",
                                 style: GoogleFonts.cairo(
                                     fontSize: 14.sp, color: black),
                               ),
@@ -174,7 +174,7 @@ class ProfileCard extends StatelessWidget {
                   width: 4.w,
                 ),
                 Text(
-                    "${controller.user?.education}",
+                    "${controller.study[0].answerContent ?? ''}",
                   style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
                 ),
                 SizedBox(
@@ -186,7 +186,7 @@ class ProfileCard extends StatelessWidget {
                   width: 4.w,
                 ),
                 Text(
-                  "${controller.user?.user?.country}",
+                  "${controller.user?.user?.country ?? ''}",
                   style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
                 ),
               ]),

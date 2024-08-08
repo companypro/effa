@@ -175,6 +175,7 @@ class LoginPage extends StatelessWidget {
                                 if (controller.controllerr.text.isEmpty) {
                                   controller.setNum();
                                 } else {
+                                  controller.loader = true;
                                   await controller.sendOTP();
                                 }
                               },

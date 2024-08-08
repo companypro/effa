@@ -15,7 +15,7 @@ class Contact extends StatelessWidget {
   TextEditingController topic = TextEditingController();
 
   TextEditingController message = TextEditingController();
-  ContactUs_And_ShareLink controller = ContactUs_And_ShareLink();
+  ContactUs_And_ShareLinkController controller = ContactUs_And_ShareLinkController();
   Contact({super.key});
 
   @override

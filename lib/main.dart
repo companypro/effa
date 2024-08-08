@@ -54,8 +54,18 @@ class _MyAppState extends State<MyApp> {
   UserState? userState;
   void trans() async {
     await fetchUserData();
-
+    var gender = storage.read('gender');
     if (user?.user?.id == null) {
+    //    if(gender != null){
+    //      setState(() {
+    //       page = DetailedInfo(
+    //         showEdit: false,
+    //       );
+    //     });
+    //     FlutterNativeSplash.remove();
+
+     
+    // }else{
       setState(() {
         page = LoginPage();
         // page = DetailedInfo(
@@ -66,19 +76,20 @@ class _MyAppState extends State<MyApp> {
         // page = ExhaustedAttemps(onPressed: (){},mainBalance: "150",showCost: "100",);
       });
       FlutterNativeSplash.remove();
+    // }
     } else {
       if (userState?.state == 1) {
         setState(() {
           page = Terms();
         });
         FlutterNativeSplash.remove();
-        } else if (userState?.state == 2) {
-          setState(() {
-            page = MainData();
-          });
-          FlutterNativeSplash.remove();
-       } else if (userState?.state == 3) {
-     // } else if (userState?.state == 2) {
+      } else if (userState?.state == 2) {
+        setState(() {
+          page = MainData();
+        });
+        FlutterNativeSplash.remove();
+      } else if (userState?.state == 3) {
+        // } else if (userState?.state == 2) {
         setState(() {
           page = DetailedInfo(
             showEdit: false,

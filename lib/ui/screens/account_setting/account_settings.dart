@@ -22,8 +22,8 @@ class AccountSettings extends StatelessWidget {
         body: SingleChildScrollView(
           child: GetBuilder<MaleDashboardController>(
             builder: (controller) {
-              print(
-                  "image===${ApiConstants.baseUrl}${controller.user?.images!.first.image.toString()}");
+              // print(
+              //     "image===${ApiConstants.baseUrl}${controller.user?.images!.first.image.toString()}");
               return Column(children: [
                 Stack(children: [
                   Container(

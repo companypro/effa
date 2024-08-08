@@ -38,7 +38,7 @@ class User {
   dynamic? image;
   int? isLogin;
   int? isComplet;
-  int? gender;
+  String? gender;
   int? isBlock;
   int? isWait;
   String? phoneCode;

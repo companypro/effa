@@ -2,8 +2,7 @@ import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/user/user_auth_model.dart';
-import 'package:effa/ui/screens/dashboard/male_dashboard.dart';
-import 'package:effa/ui/screens/main_data/main_data.dart';
+import 'package:effa/ui/screens/auth/login.dart';
 import 'package:effa/ui/screens/terms/trems.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +35,7 @@ class AuthController extends GetxController {
             'lsName': "م",
             'user_code': userCode,
             //   '':countryCode,
-            'gender': 1
+            'gender': "1"
             // 'phone_code':countryCode,
             // 'user_code': userCode,
             // "gender": 1,
@@ -48,7 +47,7 @@ class AuthController extends GetxController {
               ? "كود المستخدم غير صحيح"
               : "");
         }
-        if (response.statusCode == 200) {
+        if (response.data == 200) {
           userAuth = UserAuth.fromJson(response.data);
           storage.write(
             'token',
@@ -63,7 +62,12 @@ class AuthController extends GetxController {
             'gender',
             userAuth!.user?.gender,
           );
-          Get.offAll(() => Terms());
+           Get.snackbar(response.statusMessage!, "تم التسجيل نجاح",
+            borderRadius: 0,
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+          
+          Get.offAll(() => LoginPage());
           // if (userAuth!.user?.isComplet == 1) {
           //   print("is_complet");
           //   Get.offAll(() => DashBoardMale());
