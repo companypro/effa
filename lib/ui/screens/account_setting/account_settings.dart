@@ -43,7 +43,7 @@ class AccountSettings extends StatelessWidget {
                         child: CustomImage(
                           // "${ApiConstants.baseUrl}${controller.user?.images?.first.image}",
                           isNetwork: true,
-                          "${controller.user?.images?.isEmpty}" == "true"
+                          "${controller.user?.user?.image}" == "null"
                               ? "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
                               : "${ApiConstants.baseUrl}${controller.user?.user?.image}",
                           // "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",

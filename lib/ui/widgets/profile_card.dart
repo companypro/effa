@@ -9,14 +9,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
-import 'package:carousel_slider/carousel_controller.dart' as carousel_slider_controller;
+import 'package:carousel_slider/carousel_controller.dart'
+    as carousel_slider_controller;
 
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileCard extends StatelessWidget {
   ProfileCard({Key? key}) : super(key: key);
   MyProfileController controller = Get.find();
-  final carousel_slider_controller.CarouselController controllerImages = carousel_slider_controller.CarouselController();
+  final carousel_slider_controller.CarouselController controllerImages =
+      carousel_slider_controller.CarouselController();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -25,16 +27,13 @@ class ProfileCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-              color: Colors.white70, width: 1
-          ),
+          border: Border.all(color: Colors.white70, width: 1),
           boxShadow: const [
             BoxShadow(
                 color: gGrey,
                 spreadRadius: 0.2,
-                blurRadius:4,
-                offset: Offset(0,3)
-            ),
+                blurRadius: 4,
+                offset: Offset(0, 3)),
           ],
         ),
         child: Column(children: [
@@ -56,7 +55,7 @@ class ProfileCard extends StatelessWidget {
                           onPageChanged: (index, reason) {
                             controller.updateIndex(index.toDouble());
                           }),
-                      carouselController:controllerImages,
+                      carouselController: controllerImages,
                     ),
                   ),
                   Directionality(
@@ -104,7 +103,7 @@ class ProfileCard extends StatelessWidget {
                                 width: 5.w,
                               ),
                               Text(
-                                "${controller.relegion[0]?.answerContent.toString() ??''}",
+                                "${controller.relegion[0]?.answerContent.toString() ?? ''}",
                                 style: GoogleFonts.cairo(
                                     fontSize: 14.sp, color: black),
                               ),
@@ -128,7 +127,7 @@ class ProfileCard extends StatelessWidget {
                                 width: 5.w,
                               ),
                               Text(
-                                  "${controller.user?.job}",
+                                "${controller.user?.job}",
                                 style: GoogleFonts.cairo(
                                     fontSize: 14.sp, color: black),
                               ),
@@ -142,7 +141,7 @@ class ProfileCard extends StatelessWidget {
                     child: Transform.rotate(
                       angle: -math.pi / -1,
                       child: DotsIndicator(
-                        dotsCount:4, //controller.totalDots!,
+                        dotsCount: 4, //controller.totalDots!,
                         position: controller.currentIndex,
                         axis: Axis.vertical,
                         reversed: true,
@@ -157,10 +156,17 @@ class ProfileCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  controller.userImages.isEmpty?Center(child: Text(
-                    'لا توجد صور شخصيه',
-                    style: GoogleFonts.cairo(fontSize: 18.sp, color: basicPink),
-                  ),):const Center(child: SizedBox(),)
+                  controller.userImages.isEmpty
+                      ? Center(
+                          child: Text(
+                            'لا توجد صور شخصيه',
+                            style: GoogleFonts.cairo(
+                                fontSize: 18.sp, color: basicPink),
+                          ),
+                        )
+                      : const Center(
+                          child: SizedBox(),
+                        )
                 ],
               );
             },
@@ -175,7 +181,7 @@ class ProfileCard extends StatelessWidget {
                   width: 4.w,
                 ),
                 Text(
-                    "${controller.study[0].answerContent ?? ''}",
+                  "${controller.study[0].answerContent ?? ''}",
                   style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
                 ),
                 SizedBox(
@@ -204,7 +210,8 @@ class ProfileCard extends StatelessWidget {
           (element) => ClipRRect(
             borderRadius: BorderRadius.circular(18.0),
             child: CachedNetworkImage(
-              imageUrl: 'https://analyzes.online/effah/effah/public/${element.image!}',
+              imageUrl:
+                  'https://analyzes.online/effah/effah/public/${element.image!}',
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -217,8 +224,13 @@ class ProfileCard extends StatelessWidget {
                   child: SizedBox(
                       height: 30,
                       width: 30,
-                      child: CircularProgressIndicator(color: basicPink,))),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+                      child: CircularProgressIndicator(
+                        color: basicPink,
+                      ))),
+              errorWidget: (context, url, error) {
+                print('error Images home ==$error');
+                return const Icon(Icons.error);
+              },
             ),
           ),
         )
