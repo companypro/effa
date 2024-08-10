@@ -69,9 +69,9 @@ class MyProfile extends StatelessWidget {
         ),
         body: GetBuilder<MyProfileController>(
           builder: (controller) {
-                     GetStorage storage = GetStorage();
+          //            GetStorage storage = GetStorage();
 
-           String nationalityVal =  storage.read("nationality");
+          //  String nationalityVal =  storage.read("nationality");
             return controller.loader
                 ? const Center(
                     child: CircularProgressIndicator(
@@ -91,8 +91,7 @@ class MyProfile extends StatelessWidget {
                                 job: controller.user?.job.toString() ?? '',
                                 education:controller.study[0].answerContent ?? '',
                                 socialSituation:controller.relegion[0].answerContent ?? '',
-                                nationality:nationalityVal,
-                                  //  controller.user?.nationality.toString() ?? '',
+                                nationality: controller.user?.nationality.toString() ?? '',
                                 address: controller.user?.address.toString() ?? ''),
                         MyInfoCard(),
                         showEdit

@@ -49,25 +49,30 @@ class TermsController extends GetxController {
   }
 
   Future<void> updateTerms() async {
-    Map<String, dynamic> api = {
-      "is_accept_terms": 1,
-    };
-    try {
-      posted = true;
+    posted = true;
       update();
-      Dio.Response response = await dio().post(
-        'general/update_profile',
-        data: Dio.FormData.fromMap(api),
-      );
-      if (response.statusCode == 200) {
+    Get.to(() => MainData());
         posted = false;
         update();
-        Get.to(() => MainData());
-      }
-    } catch (error) {
-      posted = false;
-      print("updateTerms error == ${error}");
-      throw (error);
-    }
-  }
+  //   Map<String, dynamic> api = {
+  //     "is_accept_terms": 1,
+  //   };
+  //   try {
+  //     posted = true;
+  //     update();
+  //     Dio.Response response = await dio().post(
+  //       'general/update_profile',
+  //       data: Dio.FormData.fromMap(api),
+  //     );
+  //     if (response.statusCode == 200) {
+  //       posted = false;
+  //       update();
+  //       Get.to(() => MainData());
+  //     }
+  //   } catch (error) {
+  //     posted = false;
+  //     print("updateTerms error == ${error}");
+  //     throw (error);
+  //   }
+   }
 }

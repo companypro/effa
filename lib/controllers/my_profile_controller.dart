@@ -59,6 +59,7 @@ class MyProfileController extends GetxController {
     // TODO: implement onInit
     super.onInit();
   }
+  
 
   Future<void> fetchUserData() async {
     try {
@@ -76,10 +77,7 @@ class MyProfileController extends GetxController {
       aboutYou = user!.user!.aboutYou ?? '';
       aboutPartner = user!.user!.aboutPartner ?? '';
 
-      if (user?.user!.gender == 2) {
-
-
-      }
+      
       if (user!.images!.isEmpty) {
         totalDots = 1;
       } else {
@@ -90,8 +88,8 @@ class MyProfileController extends GetxController {
     } catch (err) {
       loader = false;
       update();
-      Get.snackbar('خطأ في الاتصال', "NETWORK_ERR",
-          borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar('خطأ في الاتصال', "NETWORK_ERR",
+      //     borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
       print("MyProfileController error == ${err.toString()}");
       // ignore: unnecessary_brace_in_string_interps
     }

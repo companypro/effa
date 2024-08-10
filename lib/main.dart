@@ -54,18 +54,20 @@ class _MyAppState extends State<MyApp> {
   UserState? userState;
   void trans() async {
     await fetchUserData();
-    var gender = storage.read('gender');
-    if (user?.user?.id == null) {
-    //    if(gender != null){
-    //      setState(() {
-    //       page = DetailedInfo(
-    //         showEdit: false,
-    //       );
-    //     });
-    //     FlutterNativeSplash.remove();
+    var genderComplete = storage.read('genderComplete');
+    print("genderComplete");
+    print(genderComplete);
 
-     
-    // }else{
+    if (user?.user?.id == null) {
+      //    if(gender != null){
+      //      setState(() {
+      //       page = DetailedInfo(
+      //         showEdit: false,
+      //       );
+      //     });
+      //     FlutterNativeSplash.remove();
+
+      // }else{
       setState(() {
         page = LoginPage();
         // page = DetailedInfo(
@@ -76,32 +78,75 @@ class _MyAppState extends State<MyApp> {
         // page = ExhaustedAttemps(onPressed: (){},mainBalance: "150",showCost: "100",);
       });
       FlutterNativeSplash.remove();
-    // }
+      // }
     } else {
-      if (userState?.state == 1) {
-        setState(() {
-          page = Terms();
-        });
-        FlutterNativeSplash.remove();
-      } else if (userState?.state == 2) {
-        setState(() {
-          page = MainData();
-        });
-        FlutterNativeSplash.remove();
-      } else if (userState?.state == 3) {
-        // } else if (userState?.state == 2) {
-        setState(() {
-          page = DetailedInfo(
-            showEdit: false,
-          );
-        });
-        FlutterNativeSplash.remove();
-      } else if (userState?.state == 4) {
+      if (user!.user?.isComplet == 1) {
+        print("is_complet");
         setState(() {
           page = DashBoardMale();
         });
         FlutterNativeSplash.remove();
+        //  Get.offAll(() => DashBoardMale());
+      } else if (user!.user?.isNew == 0) {
+        print("is_complet_true");
+
+        setState(() {
+          page = Terms();
+        });
+        FlutterNativeSplash.remove();
+        //Get.offAll(() => Terms());
+      } else if (user!.user?.isNew == 1) {
+        print("is_complet_false");
+        if (user!.user?.isAcceptTerms == 1) {
+          setState(() {
+            page = DetailedInfo(
+              showEdit: false,
+            );
+          });
+          FlutterNativeSplash.remove();
+          // Get.offAll(() => DetailedInfo(
+          //       showEdit: false,
+          //     ));
+          //  Get.offAll(() => MainData());
+        } else if (user!.user?.isAcceptTerms == 0) {
+          print("is_accept_terms_false");
+                    setState(() {
+            page = Terms();
+          });
+          FlutterNativeSplash.remove();
+        //  Get.offAll(() => Terms());
+        }
+      } else {
+                  setState(() {
+            page = Terms();
+          });
+          FlutterNativeSplash.remove();
       }
+
+      // if (userState?.state == 1) {
+      //   setState(() {
+      //     page = Terms();
+      //   });
+      //   FlutterNativeSplash.remove();
+      // } else if (userState?.state == 2) {
+      //   setState(() {
+      //     page = MainData();
+      //   });
+      //   FlutterNativeSplash.remove();
+      // } else if (userState?.state == 3) {
+      //   // } else if (userState?.state == 2) {
+      //   setState(() {
+      //     page = DetailedInfo(
+      //       showEdit: false,
+      //     );
+      //   });
+      //   FlutterNativeSplash.remove();
+      // } else if (userState?.state == 4) {
+      //   setState(() {
+      //     page = DashBoardMale();
+      //   });
+      //   FlutterNativeSplash.remove();
+      // }
     }
   }
 

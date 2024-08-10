@@ -48,7 +48,7 @@ class BasicPagesController extends GetxController {
   List<NationalityModel?>? nationalityModel;
 
   RxList found = [].obs;
-
+ String nationalityVal = '';
   @override
   void onInit() {
     fetchNationalityData();
@@ -78,6 +78,13 @@ class BasicPagesController extends GetxController {
   choseNational(int i, bool val) {
     tapIndex = i;
     nationalPress = val;
+     if (choosenGender != 1) {
+                                  nationalityVal =
+                                      found[i]!.fName;
+                                          update();
+
+                                }else{ nationalityVal =
+                                      found[i]!.name;}
     update();
   }
 
@@ -112,7 +119,9 @@ class BasicPagesController extends GetxController {
             'lsName': secondName.text,
             'birth_date': myDate.toString(),
             'country_id': 1,
+            'nationality':nationalityVal,
             'religion_id': religionTapIndex + 1,
+             "is_accept_terms": 1,
           }),
         );
         if (response.statusCode != 200) {
@@ -124,11 +133,13 @@ class BasicPagesController extends GetxController {
         }
         if (response.statusCode == 200) {
           storage.write(
-            'gender',
+            'genderComplete',
             choosenGender,
           );
+          var gender = storage.read('genderComplete');
           print(
               "______________________data is registered ---------------------");
+          print(gender);
           loader = false;
           Get.offAll(
             () => DetailedInfo(
@@ -137,7 +148,7 @@ class BasicPagesController extends GetxController {
           );
           update();
         }
-      } on HttpExeption catch (e) { 
+      } on HttpExeption catch (e) {
         loader = false;
         update();
         Get.snackbar(e.message, "حاول مره اخري !",

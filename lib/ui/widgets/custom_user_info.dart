@@ -338,7 +338,7 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
               height: 18,
             ),
             widget.isGirl
-                ? const SizedBox()
+                ? _UnbuildManButton()
                 : widget.isRequest
                     ? _cancel()
                     : _buildManButton(),
@@ -387,6 +387,11 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
     );
   }
 
+  Widget _UnbuildManButton() {
+    controller.start();
+    return SizedBox();
+  }
+
   Widget _buildManButton() {
     controller.start();
 
@@ -404,7 +409,7 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
                     color: transparnt,
                     width: 2,
                   )),
-            //  height: MediaQuery.of(context).size.height <= 500 ? 300.h : 55.0.h,
+              //  height: MediaQuery.of(context).size.height <= 500 ? 300.h : 55.0.h,
               child: TextButton(
                   onPressed: () {
                     showModalBottomSheet(
@@ -417,7 +422,9 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
                         //clipBehavior: Clip.antiAliasWithSaveLayer,
                         builder: (context) {
                           return Container(
-                           height: MediaQuery.of(context).size.height <= 500 ? 600.h : 265.h,
+                            height: MediaQuery.of(context).size.height <= 500
+                                ? 600.h
+                                : 265.h,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(50),
@@ -441,12 +448,20 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
                                   "تأكيد خصم ${widget.cost} نقطة لاظهار رقم ولي الامر",
                                   style: GoogleFonts.cairo(fontSize: 14),
                                 ),
-                                 SizedBox(
-                                  height: MediaQuery.of(context).size.height <= 500 ? 10.h : 20,
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height <= 500
+                                          ? 10.h
+                                          : 20,
                                 ),
                                 Padding(
-                                  padding:  EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: MediaQuery.of(context).size.height <= 500 ?5 :15),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical:
+                                          MediaQuery.of(context).size.height <=
+                                                  500
+                                              ? 5
+                                              : 15),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -464,8 +479,15 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
                                               onPressed: widget.onSendRequest,
                                               child: Text("نعم",
                                                   style: GoogleFonts.cairo(
-                                                      color: white,
-                                                      fontSize: MediaQuery.of(context).size.height <= 500 ? 10.sp : 20.0.sp,)),
+                                                    color: white,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                    .size
+                                                                    .height <=
+                                                                500
+                                                            ? 10.sp
+                                                            : 20.0.sp,
+                                                  )),
                                             )),
                                       ),
                                       const SizedBox(
@@ -488,7 +510,15 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
                                               child: Text(
                                                 "لا",
                                                 style: GoogleFonts.cairo(
-                                                    color: white, fontSize: MediaQuery.of(context).size.height <= 500 ? 10.sp : 20.0.sp,),
+                                                  color: white,
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                                  .size
+                                                                  .height <=
+                                                              500
+                                                          ? 10.sp
+                                                          : 20.0.sp,
+                                                ),
                                               ),
                                             )),
                                       ),
@@ -534,7 +564,7 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
                     bool isDone = false;
                     time.minutes == "00" ? isDone = true : isDone = false;
                     return Container(
-                              decoration: BoxDecoration(
+                        decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(27),
                             color: midGrey,
                             border: Border.all(
@@ -554,7 +584,12 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard>
                                       "${time.minutes}:${time.seconds}",
                                       style: GoogleFonts.cairo(
                                           color: Colors.white,
-                                          fontSize: MediaQuery.of(context).size.height <= 500 ? 10.sp : 14.sp,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height <=
+                                                  500
+                                              ? 10.sp
+                                              : 14.sp,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     ImageIcon(

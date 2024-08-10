@@ -78,12 +78,12 @@ class NationalityInfo extends GetView<BasicPagesController> {
                                 "controller.found.length== ${controller.nationalityModel![4]!.fName}");
                             return InkWell(
                               onTap: () async {
-                                String nationalityVal = '';
-                                if (controller.choosenGender != 1) {
-                                  nationalityVal =
-                                      controller.found[index]!.fName;
-                                }
-                                await storage.write("nationality", nationalityVal);
+                               
+                                // if (controller.choosenGender != 1) {
+                                //   nationalityVal =
+                                //       controller.found[index]!.fName;
+                                // }
+                                // await storage.write("nationality", nationalityVal);
 
                                 controller.choseNational(index, true);
                                 controller.choseNational(

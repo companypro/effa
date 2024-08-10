@@ -115,7 +115,7 @@ class GirlWidget extends StatelessWidget {
                       color: red,
                     ),
                     Text(
-                      education,
+                      education ??'',
                       style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
                     ),
                     SizedBox(
@@ -151,7 +151,7 @@ class GirlWidget extends StatelessWidget {
                         width: 7.w,
                       ),
                       Text(
-                        socialSituation ,
+                        socialSituation ??'',
                         style:
                             GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
                       ),

@@ -2,7 +2,10 @@ import 'package:country_picker/country_picker.dart';
 import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/models/user/user_auth_model.dart';
+import 'package:effa/models/user/user_auth_model2.dart';
+import 'package:effa/models/user/user_data.dart';
 import 'package:effa/ui/screens/dashboard/male_dashboard.dart';
+import 'package:effa/ui/screens/detailed%20_personal_data/detaild_data.dart';
 import 'package:effa/ui/screens/main_data/main_data.dart';
 import 'package:effa/ui/screens/pin_page/pin_page.dart';
 import 'package:effa/ui/screens/terms/trems.dart';
@@ -17,7 +20,7 @@ import 'package:dio/dio.dart' as Dio;
 
 class LoginController extends GetxController {
   UserAuth? userAuth;
-
+  UserInfooo? user;
   String countryName = "";
   String countryCode = "+20";
   bool checkNum = false;
@@ -216,25 +219,31 @@ class LoginController extends GetxController {
           userAuth!.accessToken,
         );
         print("object== ${userAuth!.accessToken}");
+        await fetchUserData();
         storage.write(
           'user_id',
-          userAuth!.user?.id,
+          user!.user?.id,
         );
         storage.write(
           'gender',
-          userAuth!.user?.gender,
+          user!.user?.gender,
         );
-        if (userAuth!.user?.isComplet == 1) {
+                  print(user!.user?.isAcceptTerms);
+
+        if (user!.user?.isComplet == 1) {
           print("is_complet");
           Get.offAll(() => DashBoardMale());
-        } else if (userAuth!.user?.isNew == 1) {
+        } else if (user!.user?.isNew == 0) {
           print("is_complet_true");
           Get.offAll(() => Terms());
-        } else if (userAuth!.user?.isNew == 0) {
+        } else if (user!.user?.isNew == 1) {
           print("is_complet_false");
-          if (userAuth!.user?.isAcceptTerms == 1) {
-            Get.offAll(() => MainData());
-          } else if (userAuth!.user?.isAcceptTerms == 0) {
+          if (user!.user?.isAcceptTerms == 1) {
+           Get.offAll(() => DetailedInfo(
+            showEdit: false,
+          ));
+          //  Get.offAll(() => MainData());
+          } else if (user!.user?.isAcceptTerms == 0) {
             print("is_accept_terms_false");
             Get.offAll(() => Terms());
           }
@@ -329,6 +338,26 @@ class LoginController extends GetxController {
           borderRadius: 0,
           snackPosition: SnackPosition.BOTTOM);
       loader = false;
+    }
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      final Dio.Response response = await dio().get(
+        'myData',
+      );
+      print("LoginController response == ${response.data}");
+      if (response.statusCode == 200) {
+        //  user = UserInfooo.fromJson(response.data);
+         user = UserInfooo.fromJson(response.data);
+        update();
+      }
+    } catch (err) {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
+      // ignore: unnecessary_brace_in_string_interps
     }
   }
 }

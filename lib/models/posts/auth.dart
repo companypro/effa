@@ -47,7 +47,7 @@ class AuthController extends GetxController {
               ? "كود المستخدم غير صحيح"
               : "");
         }
-        if (response.data == 200) {
+        if (response.statusCode == 200) {
           userAuth = UserAuth.fromJson(response.data);
           storage.write(
             'token',
@@ -67,7 +67,7 @@ class AuthController extends GetxController {
             showProgressIndicator: false,
             duration: const Duration(seconds: 4));
           
-          Get.offAll(() => LoginPage());
+          Get.offAll(() => Terms());
           // if (userAuth!.user?.isComplet == 1) {
           //   print("is_complet");
           //   Get.offAll(() => DashBoardMale());

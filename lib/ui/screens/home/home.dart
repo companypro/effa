@@ -48,9 +48,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         ),
         child: GetBuilder<MyProfileController>(
           builder: (controller) {
-                GetStorage storage = GetStorage();
+            //       GetStorage storage = GetStorage();
 
-           String nationalityVal =  storage.read("nationality");
+            //  String nationalityVal =  storage.read("nationality");
             return controller.loader
                 ? const Center(
                     child: CircularProgressIndicator(
@@ -58,129 +58,138 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     ),
                   )
                 : NestedScrollView(
-              headerSliverBuilder: (context, value) {
-                return [
-                  SliverToBoxAdapter(
-                      child: Column(children: [
-                    controller.user?.user!.gender == 1
-                    ? ProfileCard()
-                        // ? ImageUserCard(
-                        //         name: controller.user?.user!.fullName ?? '',
-                        //     age: controller.user?.user!.age!.toString() ?? '',
-                            
-                        //     socialStatus:controller.relegion[0].answerContent.toString() ??
-                        //             '',
-                        //     nationality:
-                        //         controller.user?.nationality.toString() ?? '',
-                        //     job:  controller.user?.job.toString() ?? '',
-                        //     dotsCount: controller.totalDots!,
-                        //     position: controller.currentIndex,
-                        //     study:controller.study[0].answerContent ?? '',
-                        //     city:  controller.user?.address.toString() ?? '',
-                        //     images: controller.userImages,
-                        //     onPageChanged: (index, reason) {
-                        //       controller.updateIndex(index.toDouble());
-                        //     },
-                        //   )
-                        : GirlWidget(
-                                name: controller.user?.user!.fullName ?? '',
-                            age: controller.user?.user!.age!.toString() ?? '',
-                            job: controller.user?.job.toString() ?? '',
-                            education:
-                                controller.study[0].answerContent ?? '',
-                            socialSituation:
-                                controller.relegion[0].answerContent.toString(),
-                            nationality:nationalityVal,
-                              //  controller.user?.nationality.toString() ?? '',
-                            address: controller.user?.address.toString() ?? ''),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: whiteRaduis),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 15),
-                        child: TabBar(
-                          labelColor: red,
-                          unselectedLabelColor: black,
-                          indicatorColor: red,
-                          indicatorWeight: 5.3.w,
-                          indicatorPadding:
-                              EdgeInsets.symmetric(horizontal: 8.w),
-                          labelStyle: GoogleFonts.cairo(
-                            fontSize: MediaQuery.of(context).size.height <= 500
-                                ? 10.sp
-                                : 16.0.sp,
-                            fontWeight: FontWeight.bold,
+                    headerSliverBuilder: (context, value) {
+                      return [
+                        SliverToBoxAdapter(
+                            child: Column(children: [
+                          controller.user?.user!.gender == 1
+                              ? ProfileCard()
+                              // ? ImageUserCard(
+                              //         name: controller.user?.user!.fullName ?? '',
+                              //     age: controller.user?.user!.age!.toString() ?? '',
+
+                              //     socialStatus:controller.relegion[0].answerContent.toString() ??
+                              //             '',
+                              //     nationality:
+                              //         controller.user?.nationality.toString() ?? '',
+                              //     job:  controller.user?.job.toString() ?? '',
+                              //     dotsCount: controller.totalDots!,
+                              //     position: controller.currentIndex,
+                              //     study:controller.study[0].answerContent ?? '',
+                              //     city:  controller.user?.address.toString() ?? '',
+                              //     images: controller.userImages,
+                              //     onPageChanged: (index, reason) {
+                              //       controller.updateIndex(index.toDouble());
+                              //     },
+                              //   )
+                              : GirlWidget(
+                                  name: controller.user?.user!.fullName ?? '',
+                                  age: controller.user?.user!.age!.toString() ??
+                                      '',
+                                  job: controller.user?.job.toString() ?? '',
+                                  education:
+                                      controller.study[0].answerContent ?? '',
+                                  socialSituation:
+                                      controller.relegion[0].answerContent ??
+                                          '',
+                                  nationality:
+                                      controller.user?.nationality.toString() ??
+                                          '',
+                                  address:
+                                      controller.user?.address.toString() ??
+                                          ''),
+                          SizedBox(
+                            height: 20.h,
                           ),
-                          controller: _tabcontroller,
-                          tabs: const [
-                            Tab(
-                              text: 'المواصفات',
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: whiteRaduis),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: TabBar(
+                                labelColor: red,
+                                unselectedLabelColor: black,
+                                indicatorColor: red,
+                                indicatorWeight: 5.3.w,
+                                indicatorPadding:
+                                    EdgeInsets.symmetric(horizontal: 8.w),
+                                labelStyle: GoogleFonts.cairo(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height <= 500
+                                          ? 10.sp
+                                          : 16.0.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                controller: _tabcontroller,
+                                tabs: const [
+                                  Tab(
+                                    text: 'المواصفات',
+                                  ),
+                                  Tab(
+                                    text: 'المراحل',
+                                  ),
+                                ],
+                              ),
                             ),
-                            Tab(
-                              text: 'المراحل',
+                          ),
+                        ]))
+                      ];
+                    },
+                    body: TabBarView(
+                      controller: _tabcontroller,
+                      children: <Widget>[
+                        SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomUserInfoCard(
+                              personalData: controller.personal,
+                              relegion: controller.relegion,
+                              study: controller.study,
+                              family: controller.family,
+                              interests: controller.interests,
+                              userImages: controller.userImages,
+                              aboutMe: controller.aboutYou ?? "",
+                              aboutPartner: controller.aboutPartner ?? "",
+                              cost: "150",
+                              isRequest: controller.isRequest,
+                              onSendRequest: () {
+                                controller.requestFatherData();
+                                Get.back();
+                              },
+                              isGirl: controller.user?.user!.gender == 1
+                                  ? false
+                                  : true,
+                              cancelFather: () {
+                                controller.cancelFather();
+                              },
+                              onCancel: () {},
+                              onSubmitRep: () {
+                                Get.back();
+                              },
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                        SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomSteps(
+                              showParentData: controller.parentDataShow,
+                              onPressed: controller.showParent,
+                              guardianName: "احمد احمد",
+                              guardianRelate: "الاب",
+                              phone: "0151581424",
+                              mainBalance:
+                                  controller.user?.user?.points.toString() ??
+                                      '',
+                              showCost: "150",
+                              isGirl: false,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ]))
-                ];
-              },
-              body: TabBarView(
-                controller: _tabcontroller,
-                children: <Widget>[
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CustomUserInfoCard(
-                        personalData: controller.personal,
-                        relegion: controller.relegion,
-                        study: controller.study,
-                        family: controller.family,
-                        interests: controller.interests,
-                        userImages: controller.userImages,
-                        aboutMe: controller.aboutYou ?? "",
-                        aboutPartner: controller.aboutPartner ?? "",
-                        cost: "150",
-                        isRequest: controller.isRequest,
-                        onSendRequest: () {
-                          controller.requestFatherData();
-                          Get.back();
-                        },
-                        isGirl:controller.user?.user!.gender == 1?false: true,
-                        cancelFather: () {
-                          controller.cancelFather();
-                        },
-                        onCancel: () {},
-                        onSubmitRep: () {
-                          Get.back();
-                        },
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CustomSteps(
-                        showParentData: controller.parentDataShow,
-                        onPressed: controller.showParent,
-                        guardianName: "احمد احمد",
-                        guardianRelate: "الاب",
-                        phone: "0151581424",
-                        mainBalance:
-                            controller.user?.user?.points.toString() ?? '',
-                        showCost: "150",
-                        isGirl: false,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
+                  );
           },
         ),
       ),
