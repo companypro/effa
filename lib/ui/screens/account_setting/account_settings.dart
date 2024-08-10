@@ -22,6 +22,8 @@ class AccountSettings extends StatelessWidget {
         body: SingleChildScrollView(
           child: GetBuilder<MaleDashboardController>(
             builder: (controller) {
+              print(
+                  'controller.user?.images?.isEmpty == ${ApiConstants.baseUrl}${controller.user?.user?.image}');
               // print(
               //     "image===${ApiConstants.baseUrl}${controller.user?.images!.first.image.toString()}");
               return Column(children: [
@@ -41,9 +43,9 @@ class AccountSettings extends StatelessWidget {
                         child: CustomImage(
                           // "${ApiConstants.baseUrl}${controller.user?.images?.first.image}",
                           isNetwork: true,
-                          "${controller.user?.images?.isEmpty}" == "true"
+                          "${controller.user?.user?.image}" == "null"
                               ? "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-                              : "${ApiConstants.baseUrl}${controller.user!.user!.image}",
+                              : "${ApiConstants.baseUrl}${controller.user?.user?.image}",
                           // "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
                           height: 96.h,
                           width: 96.w,
@@ -262,7 +264,6 @@ class AccountSettings extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   controller.logout();
-
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.only(top: 3.0.h),

@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
+import 'package:carousel_slider/carousel_controller.dart' as carousel_slider_controller;
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -38,7 +39,7 @@ class ImageUserCard extends StatelessWidget {
     required this.study,
     required this.city,
   }) : super(key: key);
-  final CarouselController controllerImages = CarouselController();
+  final carousel_slider_controller.CarouselController controllerImages = carousel_slider_controller.CarouselController();
 
   @override
   Widget build(BuildContext context) {
