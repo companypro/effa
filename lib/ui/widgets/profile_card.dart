@@ -103,7 +103,7 @@ class ProfileCard extends StatelessWidget {
                                 width: 5.w,
                               ),
                               Text(
-                                "${controller.relegion[0]?.answerContent.toString() ?? ''}",
+                               controller.relegion[0].answerContent == null ?'':controller.relegion[0].answerContent.toString(),
                                 style: GoogleFonts.cairo(
                                     fontSize: 14.sp, color: black),
                               ),

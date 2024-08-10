@@ -62,8 +62,31 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       return [
                         SliverToBoxAdapter(
                             child: Column(children: [
-                          controller.user?.user!.gender == 1
-                              ? ProfileCard()
+                          controller.user?.user!.gender == 2
+                        ? ImageUserCard(
+                            name: "احمد",
+                            age: "22",
+                            socialStatus: "اعزب",
+                            nationality: "مصري",
+                            job: "مهندي",
+                            dotsCount: controller.totalDots!,
+                            position: controller.currentIndex,
+                            study: "جامعي",
+                            city: "الغربيه",
+                            images: controller.userImages,
+                            onPageChanged: (index, reason) {
+                              controller.updateIndex(index.toDouble());
+                            },
+                          )
+                        : GirlWidget(
+                            name: "نورهان",
+                            age: "22",
+                            job: "لاتوجد وظيفه",
+                            education: "عالي",
+                            socialSituation: "عزباء",
+                            nationality: "مصريه",
+                            address: "القاهره"),
+                              //? ProfileCard()
                               // ? ImageUserCard(
                               //         name: controller.user?.user!.fullName ?? '',
                               //     age: controller.user?.user!.age!.toString() ?? '',
@@ -82,22 +105,22 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                               //       controller.updateIndex(index.toDouble());
                               //     },
                               //   )
-                              : GirlWidget(
-                                  name: controller.user?.user!.fullName ?? '',
-                                  age: controller.user?.user!.age!.toString() ??
-                                      '',
-                                  job: controller.user?.job.toString() ?? '',
-                                  education:
-                                      controller.study[0].answerContent ?? '',
-                                  socialSituation:
-                                      controller.relegion[0].answerContent ??
-                                          '',
-                                  nationality:
-                                      controller.user?.nationality.toString() ??
-                                          '',
-                                  address:
-                                      controller.user?.address.toString() ??
-                                          ''),
+                              // : GirlWidget(
+                              //     name: controller.user?.user!.fullName ?? '',
+                              //     age: controller.user?.user!.age!.toString() ??
+                              //         '',
+                              //     job: controller.user?.job.toString() ?? '',
+                              //     education:
+                              //         controller.study[0].answerContent ?? '',
+                              //     socialSituation:
+                              //         controller.relegion[0].answerContent ??
+                              //             '',
+                              //     nationality:
+                              //         controller.user?.nationality.toString() ??
+                              //             '',
+                              //     address:
+                              //         controller.user?.address.toString() ??
+                              //             ''),
                           SizedBox(
                             height: 20.h,
                           ),
@@ -170,7 +193,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        SingleChildScrollView(
+                  SingleChildScrollView(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CustomSteps(
@@ -183,10 +206,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   controller.user?.user?.points.toString() ??
                                       '',
                               showCost: "150",
-                              isGirl: false,
+                              isGirl:controller.user?.user!.gender == 1
+                                  ? false
+                                  : true,
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   );
