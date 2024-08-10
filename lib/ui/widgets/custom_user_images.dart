@@ -9,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
-import 'package:carousel_slider/carousel_controller.dart' as carousel_slider_controller;
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,7 +38,7 @@ class ImageUserCard extends StatelessWidget {
     required this.study,
     required this.city,
   }) : super(key: key);
-  final carousel_slider_controller.CarouselController controllerImages = carousel_slider_controller.CarouselController();
+  final CarouselController controllerImages = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +84,7 @@ class ImageUserCard extends StatelessWidget {
                           style: GoogleFonts.cairo(
                             fontWeight: FontWeight.bold,
                             fontSize: 22.sp,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                         Text(
@@ -101,7 +100,7 @@ class ImageUserCard extends StatelessWidget {
                           style: GoogleFonts.cairo(
                             fontSize: 25.sp,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                       ]),
@@ -128,7 +127,7 @@ class ImageUserCard extends StatelessWidget {
                         Text(
                           nationality,
                           style: GoogleFonts.cairo(
-                              fontSize: 14.sp, color: white),
+                              fontSize: 14.sp, color: black),
                         ),
                         SizedBox(
                           width: 12.w,
@@ -140,7 +139,7 @@ class ImageUserCard extends StatelessWidget {
                         Text(
                           job,
                           style: GoogleFonts.cairo(
-                              fontSize: 14.sp, color: white),
+                              fontSize: 14.sp, color: black),
                         ),
                       ]),
                     ]),

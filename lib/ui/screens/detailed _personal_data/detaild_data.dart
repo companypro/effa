@@ -156,7 +156,8 @@ class DetailedInfo extends StatelessWidget {
                               const MySeparator(
                                 color: llightGrey,
                               ),
-                              gender.read("gender") == 1
+                              
+controller.user?.user!.gender == 1
                                   ? InkWell(
                                       onTap: () {
                                         Get.to(() => PersonalPic(), //next page class
