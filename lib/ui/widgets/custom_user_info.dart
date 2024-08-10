@@ -20,14 +20,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomUserInfoCard extends StatefulWidget {
   List<Question> personalData;
