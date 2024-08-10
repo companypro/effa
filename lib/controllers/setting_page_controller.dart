@@ -32,13 +32,16 @@ class SettingPageController extends GetxController {
       Dio.Response response = await dio().get(
         'about',
       );
+      print("fetchAboutData == ${response.data}");
       Dio.Response responseLink = await dio().get(
         'share_link',
       );
+      print("responseLink == ${responseLink.data}");
       Dio.Response responseSocials = await dio().get(
         'socials',
       );
-      print("fetchAboutData == ${response.data}");
+      print("responseSocials == ${responseSocials.data}");
+
       aboutModel = TermsModelFromJson(response.toString());
       shareLinkModel = shareLinkModelFromJson(responseLink.toString());
       socialsLinkModel =

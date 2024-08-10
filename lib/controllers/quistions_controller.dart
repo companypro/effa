@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
@@ -163,7 +162,7 @@ class QuestionsController extends GetxController {
           // 'categories/get_questions?category_id=2&level=1&qu=1',
         );
 
-        print(response.data);
+        print('response.dat==${response.data}');
 
         questions = QuestionsAndAnswers.fromJson(response.data);
         map = questions?.questions;
